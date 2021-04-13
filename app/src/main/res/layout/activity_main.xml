@@ -2,39 +2,87 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/font"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.camera.view.PreviewView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/preview_view"
-       />
+
+
 
     <androidx.camera.view.PreviewView
-        android:background="@drawable/scanning_area"
+        android:id="@+id/preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </androidx.camera.view.PreviewView>
+
+    <androidx.camera.view.PreviewView
         android:layout_width="230dp"
         android:layout_height="230dp"
         android:layout_gravity="center"
+        android:background="@drawable/scanning_area"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-    <FrameLayout
-        android:id="@+id/container_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/see_result_btn"
+    </androidx.camera.view.PreviewView>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Scanning"
+        android:textSize="40sp"
+        android:fontFamily="@font/montserrat_alternates_semi_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/see_result_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/scan_qr_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:cardBackgroundColor="@color/second_color_yellow"
+        android:transitionName="scanQrBtn"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCAN QR"
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CODE"
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:layout_gravity="bottom"
+            android:textColor="@color/black"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="6dp"
+            />
+
+        <ImageView
+            android:layout_width="71dp"
+            android:layout_height="71dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_qr_code_scanner_24"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="22dp"
+            />
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

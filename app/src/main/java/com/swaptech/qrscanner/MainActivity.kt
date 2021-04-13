@@ -14,19 +14,15 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.common.util.concurrent.ListenableFuture
 import com.swaptech.qrscanner.databinding.ActivityMainBinding
+
 import java.lang.NullPointerException
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-
-            else -> false
-        }
-    }
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
@@ -41,15 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = binding.root
         setContentView(view)
 
-
-        //supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.seeResultBtn.setOnClickListener {
-            Toast.makeText(this, qrCode, Toast.LENGTH_SHORT).show()
-        }
-
-        binding.seeResultBtn.visibility = View.GONE
+        supportActionBar?.hide()
 
         if(allPermissionsGranted()) {
            startCamera()
@@ -57,6 +45,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ActivityCompat.requestPermissions(this, arrayOf(REQUIRED_PERMISSION), PERMISSION_REQUEST_CAMERA)
         }
         mIntent = Intent(this, ResultActivity::class.java)
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -68,6 +57,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this, "PERMISSION DENIED", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.scanQrBtn.animate().alpha(0f).setDuration(1650).start()
     }
 
     private fun startCamera() {
@@ -134,12 +128,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mIntent = null
     }
 
+
+
     override fun onRestart() {
         super.onRestart()
         mIntent = Intent(this@MainActivity, ResultActivity::class.java).apply {
             putExtra(EXTRA_DATA_KEY, qrCode)
         }
     }
+
 
     companion object {
         private const val PERMISSION_REQUEST_CAMERA = 0

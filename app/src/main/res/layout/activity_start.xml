@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StartActivity"
+    app:layoutDescription="@xml/activity_start_scene"
+    android:background="@color/main_color_blue"
+    android:id="@+id/activity_start"
+    >
+
+    <TextView
+        android:id="@+id/welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_alternates_semi_bold"
+        android:layout_marginTop="10dp"
+        android:text="Welcome!"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:layout_height="244dp"
+        android:layout_width="244dp"
+        android:id="@+id/big_purple_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="324dp"
+        android:layout_marginStart="500dp"
+        android:background="@drawable/big_purple_circle"
+        />
+
+    <View
+        android:id="@+id/big_cyan_circle"
+        android:layout_height="244dp"
+        android:layout_width="244dp"
+        android:background="@drawable/big_cyan_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:id="@+id/small_purple_circle_one"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/small_purple_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="160dp"
+        android:layout_marginTop="1000dp"
+        />
+
+    <View
+        android:id="@+id/small_purple_circle_two"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/small_purple_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="100dp"
+        android:layout_marginTop="1000dp"
+        />
+
+    <View
+        android:id="@+id/small_cyan_circle"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/small_cyan_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="150dp"
+        android:layout_marginTop="1000dp"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/create_qr_btn"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        app:cardCornerRadius="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintVertical_bias="0.5"
+        app:cardBackgroundColor="@color/second_color_yellow"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="71dp"
+            android:layout_height="71dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_auto_fix_high_24"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE QR"
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CODE"
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:layout_gravity="bottom"
+            android:textColor="@color/black"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="6dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/scan_qr_btn"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        app:cardCornerRadius="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:cardBackgroundColor="@color/second_color_yellow"
+        android:clickable="true"
+        android:focusable="true"
+        android:transitionName="scanQrBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardElevation="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCAN QR"
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CODE"
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:layout_gravity="bottom"
+            android:textColor="@color/black"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="6dp"
+            />
+
+        <ImageView
+            android:layout_width="71dp"
+            android:layout_height="71dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_qr_code_scanner_24"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="22dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start" >
+        <Constraint
+            android:id="@+id/welcome_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Constraint
+            android:layout_height="244dp"
+            android:layout_width="244dp"
+            android:id="@+id/big_purple_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="324dp"
+            android:layout_marginStart="1000dp"
+          />
+
+        <Constraint
+            android:id="@+id/big_cyan_circle"
+            android:layout_height="244dp"
+            android:layout_width="244dp"
+            android:background="@drawable/big_cyan_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="1000dp"
+            android:layout_marginEnd="500dp"
+            />
+
+        <Constraint
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_purple_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="160dp"
+            android:layout_marginTop="1000dp"
+            android:id="@+id/small_purple_circle_one"
+            />
+
+        <Constraint
+            android:id="@+id/small_purple_circle_two"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_purple_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="1000dp"
+            />
+
+        <Constraint
+            android:id="@+id/small_cyan_circle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_cyan_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:layout_marginEnd="150dp"
+            android:layout_marginTop="1000dp"
+            />
+
+        <Constraint
+            android:id="@+id/scan_qr_btn"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/start_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.69"
+            app:cardElevation="0dp"
+            />
+
+        <Constraint
+            android:id="@+id/create_qr_btn"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/start_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="45dp"
+            app:layout_constraintVertical_bias="0.69"
+            android:visibility="gone"
+            />
+    </ConstraintSet>
+
+
+
+    <ConstraintSet android:id="@+id/end" >
+
+        <Constraint android:id="@+id/welcome_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+          />
+
+        <Constraint
+            android:id="@+id/big_purple_circle"
+            android:layout_height="244dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="244dp"
+            app:layout_constraintVertical_bias="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="280dp"
+            />
+
+        <Constraint
+
+            android:id="@+id/big_cyan_circle"
+            android:layout_height="244dp"
+            android:layout_width="244dp"
+            android:background="@drawable/big_cyan_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="625dp"
+            android:layout_marginEnd="200dp"
+            />
+
+        <Constraint
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_purple_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="160dp"
+            android:layout_marginTop="100dp"
+            android:id="@+id/small_purple_circle_one"
+            />
+
+        <Constraint
+            android:id="@+id/small_purple_circle_two"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_purple_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="370dp"
+            />
+
+        <Constraint
+            android:id="@+id/small_cyan_circle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_cyan_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="120dp"
+            android:layout_marginTop="700dp"
+            />
+
+        <Constraint
+            android:id="@+id/scan_qr_btn"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/start_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.69"
+            android:elevation="20dp"
+            app:transitionEasing="0"
+            app:cardElevation="10dp"
+           />
+
+        <Constraint
+
+            android:id="@+id/create_qr_btn"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/start_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="45dp"
+            app:layout_constraintVertical_bias="0.69"
+            android:elevation="20dp"
+            android:visibility="gone"
+            />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetStart="@+id/start"
+        app:constraintSetEnd="@+id/end"
+        app:autoTransition="animateToEnd"
+        app:duration="1000"
+     >
+
+    </Transition>
+
+
+
+</MotionScene>

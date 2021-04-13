@@ -10,36 +10,37 @@ import androidx.core.content.ContextCompat
 import com.swaptech.qrscanner.databinding.ActivityResultBinding
 
 class ResultActivity : AppCompatActivity() {
+
     private var result: String? = null
     private var _binding: ActivityResultBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         _binding = ActivityResultBinding.inflate(layoutInflater)
         val view = binding.root
+
         setContentView(view)
+
+        supportActionBar?.hide()
 
         result = intent.getStringExtra(EXTRA_DATA_KEY)
 
         result?.let { res ->
             if(URLValidator.validate(res)) {
-                binding.resultTv.setTextColor(ContextCompat.getColor(this, R.color.black))
-                binding.resultTv.text = underscoreString(res)
-                binding.resultTv.setOnClickListener {
+                binding.resultCardTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.resultCardTv.text = underscoreString(res)
+                binding.resultCardTv.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(res))
                     if(intent.resolveActivity(this.packageManager) != null) {
                         startActivity(intent)
                     }
                 }
             } else {
-                binding.resultTv.text = res
+                binding.resultCardTv.text = res
             }
         }
-
-
-
-
     }
 
     private fun underscoreString(text: String): SpannableString {
