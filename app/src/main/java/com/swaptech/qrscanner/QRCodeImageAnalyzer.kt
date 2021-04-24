@@ -12,7 +12,7 @@ import java.lang.Exception
 import java.nio.ByteBuffer
 
 
-class QRCodeImageAnalyzer(private var callback: OnQRCodeAnalyzerResult?): ImageAnalysis.Analyzer {
+class QRCodeImageAnalyzer(private var callback: OnQRCodeAnalyzerResult): ImageAnalysis.Analyzer {
 
     private fun ByteBuffer.toByteArray(): ByteArray {
         rewind()
@@ -37,7 +37,7 @@ class QRCodeImageAnalyzer(private var callback: OnQRCodeAnalyzerResult?): ImageA
             try {
                 val result = QRCodeMultiReader().decode(binaryBitmap)
                 //val imageSource = image.image
-                callback?.onSuccess(result.toString())
+                callback.onSuccess(result.toString())
             } catch (e: Exception) {
 
             }
@@ -45,5 +45,9 @@ class QRCodeImageAnalyzer(private var callback: OnQRCodeAnalyzerResult?): ImageA
         }
 
         image.close()
+    }
+
+    interface OnQRCodeAnalyzerResult {
+        fun onSuccess(result: String)
     }
 }

@@ -33,10 +33,10 @@ class StartActivity : AppCompatActivity() {
         binding.scanQrBtn.setOnTouchListener { v, event ->
             when(event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    binding.scanQrBtn.animate().scaleX(0.8f).scaleY(0.8f).setDuration(200).setInterpolator(BounceInterpolator()).start()
+                    v.animate().scaleX(0.8f).scaleY(0.8f).setDuration(200).setInterpolator(BounceInterpolator()).start()
                 }
                 MotionEvent.ACTION_UP -> {
-                    binding.scanQrBtn.animate().scaleX(1f).scaleY(1f).setDuration(200).setInterpolator(BounceInterpolator()).start()
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(200).setInterpolator(BounceInterpolator()).start()
 
                     val options = ActivityOptions.makeSceneTransitionAnimation(this@StartActivity, binding.scanQrBtn, ViewCompat.getTransitionName(binding.scanQrBtn))
 

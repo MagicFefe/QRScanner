@@ -13,9 +13,9 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/preview_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        />
 
-    </androidx.camera.view.PreviewView>
 
     <androidx.camera.view.PreviewView
         android:layout_width="230dp"
@@ -85,4 +85,18 @@
             android:layout_marginTop="22dp"
             />
     </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/pickFromGalleryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/ic_baseline_gallery_30"
+        android:background="@android:color/transparent"
+
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

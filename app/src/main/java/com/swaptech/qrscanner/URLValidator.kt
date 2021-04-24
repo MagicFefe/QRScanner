@@ -1,10 +1,36 @@
 package com.swaptech.qrscanner
 
+import androidx.lifecycle.ViewModel
+
 object URLValidator {
-    fun validate(url: String): Boolean {
+
+    fun validate(url: String): Pair<Boolean, MutableList<String>?>{
+
         val protocolFamily = listOf("http://", "https://")
+        //val length = url.length
+        val regexp = Regex("\\w*(\\w[.]([A-Za-z0-9-._~:/?#\\[\\]@!\$&'()*+,;=А-ЯЁё])+([A-Za-z0-9А-ЯЁё]))")
 
-        return url.contains(protocolFamily[0]) || url.contains(protocolFamily[1])
+        val validOutput = regexp.findAll(url).toMutableList()
 
+        protocolFamily.forEach { keyword ->
+
+            if(url.contains(keyword)) {
+
+                return Pair(true, mutableListOf(url))
+
+            } else if(validOutput.isNotEmpty()) {
+
+                val result = mutableListOf<String>()
+
+                validOutput.forEach { url ->
+                    result.add(url.value)
+                }
+
+                return Pair(true, result)
+            }
+        }
+
+        return Pair(false, null)
     }
+
 }

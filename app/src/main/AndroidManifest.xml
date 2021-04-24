@@ -3,12 +3,12 @@
     package="com.swaptech.qrscanner">
 
     <uses-feature android:name="android.hardware.camera.any" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.VIEW" />
+            <action android:name="android.intent.action.VIEW"/>
         </intent>
     </queries>
 
@@ -28,7 +28,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ResultActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".ResultActivity"  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
 
         <activity android:name=".MainActivity" android:screenOrientation="portrait">
 
