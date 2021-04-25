@@ -83,47 +83,45 @@
         android:id="@+id/create_qr_btn"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        app:cardCornerRadius="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="45dp"
-        app:layout_constraintVertical_bias="0.5"
-        app:cardBackgroundColor="@color/second_color_yellow"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"
-        >
+        android:transitionName="scanQrBtn"
+        app:cardBackgroundColor="@color/second_color_yellow"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.69">
 
         <ImageView
             android:layout_width="71dp"
             android:layout_height="71dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_auto_fix_high_24"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-             />
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_auto_fix_high_24" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CREATE QR"
-            android:fontFamily="@font/montserrat_alternates_semi_bold"
             android:layout_gravity="bottom"
             android:layout_marginStart="12dp"
-            android:textColor="@color/black"
             android:layout_marginBottom="24dp"
-            />
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:text="CREATE QR"
+            android:textColor="@color/black" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CODE"
-            android:fontFamily="@font/montserrat_alternates_semi_bold"
             android:layout_gravity="bottom"
-            android:textColor="@color/black"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="6dp"
-            />
+            android:fontFamily="@font/montserrat_alternates_semi_bold"
+            android:text="CODE"
+            android:textColor="@color/black" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -131,7 +129,7 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         app:cardCornerRadius="9dp"
-        app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"

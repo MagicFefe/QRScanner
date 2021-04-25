@@ -3,12 +3,13 @@
     package="com.swaptech.qrscanner">
 
     <uses-feature android:name="android.hardware.camera.any" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.VIEW"/>
+            <action android:name="android.intent.action.VIEW" />
         </intent>
     </queries>
 
@@ -19,24 +20,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRScanner">
-
-        <activity android:name=".StartActivity" android:screenOrientation="portrait">
+        <activity android:name=".CreateQRActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ResultActivity"  android:screenOrientation="portrait">
+        <activity
+            android:name=".ResultActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
-
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

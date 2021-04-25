@@ -43,6 +43,8 @@ class StartActivity : AppCompatActivity() {
 
         binding.createQrBtn.setOnClickListener { btn ->
             btn.startAnimation(anim)
+            val options = ActivityOptions.makeSceneTransitionAnimation(this@StartActivity, binding.createQrBtn, ViewCompat.getTransitionName(binding.createQrBtn))
+            startActivity(Intent(this@StartActivity, CreateQRActivity::class.java), options.toBundle())
         }
     }
 
@@ -51,4 +53,6 @@ class StartActivity : AppCompatActivity() {
 
         binding.activityStart.transitionToState(R.id.end)
     }
+
+
 }
