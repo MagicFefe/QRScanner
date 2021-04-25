@@ -7,7 +7,7 @@ object URLValidator {
     fun validate(url: String): Pair<Boolean, MutableList<String>?>{
 
         val protocolFamily = listOf("http://", "https://")
-        //val length = url.length
+
         val regexp = Regex("\\w*(\\w[.]([A-Za-z0-9-._~:/?#\\[\\]@!\$&'()*+,;=А-ЯЁё])+([A-Za-z0-9А-ЯЁё]))")
 
         val validOutput = regexp.findAll(url).toMutableList()

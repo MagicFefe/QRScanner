@@ -11,10 +11,14 @@ import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.swaptech.qrscanner.databinding.ActivityResultBinding
 
 
@@ -72,15 +76,21 @@ class ResultActivity : AppCompatActivity() {
             }
 
         }
-        
-        //TODO(REMOVE THIS)
-        /*
-        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.backdrop_history))
+        //bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.actionsBottomSheet))
 
+
+
+        binding.moreActionsBtn.setOnClickListener {
+            //binding.shadow.visibility = View.VISIBLE
+            showBottomSheetDialog()
+            //bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        /*
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-
+                /*
                 when (bottomSheetBehavior.state) {
                     BottomSheetBehavior.STATE_EXPANDED -> {
 
@@ -88,29 +98,44 @@ class ResultActivity : AppCompatActivity() {
 
                         findViewById<ConstraintLayout>(R.id.backdrop_header).setBackgroundColor(ContextCompat.getColor(this@ResultActivity, R.color.second_color_yellow))
 
-                        binding.backdropHistory.imageButton.animate().rotation(180f).setDuration(110).start()
+                        //binding.backdropHistory.imageButton.animate().rotation(180f).setDuration(110).start()
 
                     }
                     BottomSheetBehavior.STATE_COLLAPSED -> {
 
-                        binding.backdropHistory.imageButton.animate().rotation(0f).setDuration(110).start()
+                        //binding.backdropHistory.imageButton.animate().rotation(0f).setDuration(110).start()
 
                     }
                     else -> {
 
-                        findViewById<ConstraintLayout>(R.id.backdrop_header).setBackgroundResource(R.drawable.backdrop)
+                        //findViewById<ConstraintLayout>(R.id.backdrop_header).setBackgroundResource(R.drawable.backdrop)
 
                     }
                 }
 
+
+                 */
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                //offset value is [-1; 1]
+                var offset = slideOffset
+                //offset value is [0; 2]
+               // offset++
+                /*
+                if (offset <= 1) {
+                    binding.shadow.alpha = offset
+                } else {
+                    binding.shadow.alpha = 1f
+                }
 
+                 */
             }
         })
 
          */
+
+
 
         /*
         binding.backdropHistory.imageButton.setOnClickListener {
@@ -123,5 +148,28 @@ class ResultActivity : AppCompatActivity() {
         }
 
          */
+    }
+
+    fun toggleBottomSheet(bottomSheetBehavior: BottomSheetBehavior<View>) {
+        if(bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        } else  {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
+    private fun showBottomSheetDialog() {
+        val bottomSheetDialog = ActionsBottomSheetDialog.newInstance(result ?: "")
+        //bottomSheetDialog.setContentView(R.layout.actions_bottom_sheet)
+        /*
+        val title = bottomSheetDialog.
+        val imageButton = bottomSheetDialog.findViewById<ImageButton>(R.id.closeBottomSheetBtn)
+        var shareBtn = bottomSheetDialog.findViewById<CardView>(R.id.shareBtn)
+        var copyBtn = bottomSheetDialog.findViewById<CardView>(R.id.copyBtn)
+
+
+         */
+
+        bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
     }
 }

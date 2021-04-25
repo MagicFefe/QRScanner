@@ -30,39 +30,25 @@ class StartActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.scanQrBtn.setOnTouchListener { v, event ->
-            when(event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    v.animate().scaleX(0.8f).scaleY(0.8f).setDuration(200).setInterpolator(BounceInterpolator()).start()
-                }
-                MotionEvent.ACTION_UP -> {
-                    v.animate().scaleX(1f).scaleY(1f).setDuration(200).setInterpolator(BounceInterpolator()).start()
+        val anim = AnimationUtils.loadAnimation(this, R.anim.scale_anim)
+        val interpolator = CustomBounceInterpolator(0.2, 10.toDouble())
+        anim.interpolator = interpolator
 
-                    val options = ActivityOptions.makeSceneTransitionAnimation(this@StartActivity, binding.scanQrBtn, ViewCompat.getTransitionName(binding.scanQrBtn))
-
-                    startActivity(Intent(this@StartActivity, MainActivity::class.java), options.toBundle())
-                }
-            }
-            true
+        binding.scanQrBtn.setOnClickListener { btn ->
+            btn.startAnimation(anim)
+            val options = ActivityOptions.makeSceneTransitionAnimation(this@StartActivity, binding.scanQrBtn, ViewCompat.getTransitionName(binding.scanQrBtn))
+            startActivity(Intent(this@StartActivity, MainActivity::class.java), options.toBundle())
         }
 
-        binding.createQrBtn.setOnTouchListener { v, event ->
-            if(event.action == MotionEvent.ACTION_DOWN) {
-                v.animate().scaleX(0.8f).scaleY(0.8f).setInterpolator(BounceInterpolator()).start()
-            }
-            if(event.action == MotionEvent.ACTION_UP) {
-                v.animate().scaleX(1f).scaleY(1f).setInterpolator(BounceInterpolator()).start()
 
-            }
-
-
-            true
+        binding.createQrBtn.setOnClickListener { btn ->
+            btn.startAnimation(anim)
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onRestart() {
+        super.onRestart()
 
-            binding.activityStart.transitionToState(R.id.end)
+        binding.activityStart.transitionToState(R.id.end)
     }
 }
