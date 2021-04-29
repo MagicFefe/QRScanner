@@ -4,27 +4,35 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Rect
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
+import android.renderscript.ScriptGroup
+import android.system.Os.close
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.zxing.BinaryBitmap
-import com.google.zxing.MultiFormatReader
-import com.google.zxing.NotFoundException
-import com.google.zxing.RGBLuminanceSource
+import com.google.mlkit.vision.barcode.BarcodeScanner
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
+import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
+import com.google.zxing.multi.qrcode.QRCodeMultiReader
+import com.google.zxing.qrcode.QRCodeReader
 import com.swaptech.qrscanner.databinding.ActivityMainBinding
+import java.io.ByteArrayOutputStream
+import java.io.Reader
+import java.util.*
 
-import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +43,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     var mIntent: Intent? = null
 
+    private val qrCodeAnalyzer by lazy {
+        QRCodeImageAnalyzer(object : QRCodeImageAnalyzer.OnQRCodeAnalyzerResult {
+            override fun onSuccess(result: String) {
+                qrCode = result
+                Toast.makeText(this@MainActivity, "result is $result", Toast.LENGTH_SHORT).show()
+                try {
+                    mIntent.apply {
+                        this?.putExtra(EXTRA_DATA_KEY, qrCode)
+                    }
+                    startActivity(mIntent)
+                } catch (e: NullPointerException) {
 
+                }
+
+                mIntent = null
+            }
+        })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +72,17 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+
+
+
         if (allPermissionsGranted()) {
             startCamera()
 
         } else {
             ActivityCompat.requestPermissions(
-                this,
-                permissions,
-                PERMISSION_REQUEST_CODE
+                    this,
+                    permissions,
+                    PERMISSION_REQUEST_CODE
             )
         }
 
@@ -68,9 +96,9 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_CODE) {
@@ -101,25 +129,8 @@ class MainActivity : AppCompatActivity() {
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-            val qrCodeAnalyzer =
-                    QRCodeImageAnalyzer(object : QRCodeImageAnalyzer.OnQRCodeAnalyzerResult {
-                        override fun onSuccess(result: String) {
-                            qrCode = result
 
-                            try {
-                                mIntent.apply {
-                                    this?.putExtra(EXTRA_DATA_KEY, qrCode)
-                                }
-                                startActivity(mIntent)
-                            } catch (e: NullPointerException) {
-
-                            }
-
-                            mIntent = null
-                        }
-                    })
-
-            val imageAnalyzer = ImageAnalysis.Builder().build().also {
+            val imageAnalyzer: ImageAnalysis = ImageAnalysis.Builder().build().also {
                 it.setAnalyzer(ContextCompat.getMainExecutor(this), qrCodeAnalyzer)
             }
 
@@ -150,9 +161,9 @@ class MainActivity : AppCompatActivity() {
     private fun allPermissionsGranted(): Boolean {
         permissions.forEach { permission ->
             if (ContextCompat.checkSelfPermission(
-                    this,
-                    permission
-                ) != PackageManager.PERMISSION_GRANTED
+                            this,
+                            permission
+                    ) != PackageManager.PERMISSION_GRANTED
             ) {
                 return false
             }
@@ -177,25 +188,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun pickImage(imageUri: Uri) {
-        val inputStream = contentResolver.openInputStream(imageUri)
-        val bitmap = BitmapFactory.decodeStream(inputStream)
-        val width = bitmap.width
-        val height = bitmap.height
-        val pixels = IntArray(width * height)
-        bitmap.getPixels(pixels, 0, width, 0, 0, width, height)
-        bitmap.recycle()
-        val source = RGBLuminanceSource(width, height, pixels)
-        val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
-        val reader = MultiFormatReader()
-        try {
-            val result = reader.decode(binaryBitmap)
+
+        val img = InputImage.fromFilePath(this, imageUri)
+        val scanner = BarcodeScanning.getClient()
+        scanner.process(img).addOnSuccessListener { barcodes ->
+
+            val barcode = barcodes.get(0)
+            val value = barcode.displayValue
+
             mIntent = Intent(this, ResultActivity::class.java).apply {
-                this.putExtra(EXTRA_DATA_KEY, result.text)
+                putExtra(EXTRA_DATA_KEY, value)
             }
             startActivity(mIntent)
-        } catch (e: NotFoundException) {
-            Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show()
+
+        }.addOnFailureListener {
+            Toast.makeText(this, "Nothing found", Toast.LENGTH_SHORT).show()
         }
+
+
     }
 
 

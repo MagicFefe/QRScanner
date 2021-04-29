@@ -150,25 +150,10 @@ class ResultActivity : AppCompatActivity() {
          */
     }
 
-    fun toggleBottomSheet(bottomSheetBehavior: BottomSheetBehavior<View>) {
-        if(bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        } else  {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        }
-    }
 
     private fun showBottomSheetDialog() {
         val bottomSheetDialog = ActionsBottomSheetDialog.newInstance(result ?: "")
-        //bottomSheetDialog.setContentView(R.layout.actions_bottom_sheet)
-        /*
-        val title = bottomSheetDialog.
-        val imageButton = bottomSheetDialog.findViewById<ImageButton>(R.id.closeBottomSheetBtn)
-        var shareBtn = bottomSheetDialog.findViewById<CardView>(R.id.shareBtn)
-        var copyBtn = bottomSheetDialog.findViewById<CardView>(R.id.copyBtn)
 
-
-         */
 
         bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
     }
