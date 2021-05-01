@@ -7,6 +7,8 @@ import android.media.ToneGenerator
 import android.widget.ImageView
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
 import com.google.zxing.BinaryBitmap
 import com.google.zxing.PlanarYUVLuminanceSource
 import com.google.zxing.RGBLuminanceSource
@@ -21,16 +23,36 @@ import java.nio.ByteBuffer
 class QRCodeImageAnalyzer(private var callback: OnQRCodeAnalyzerResult): ImageAnalysis.Analyzer {
 
 
-    @SuppressLint("UnsafeExperimentalUsageError")
-    override fun analyze(image: ImageProxy) {
-        if (image.format == ImageFormat.YUV_420_888
-                || image.format == ImageFormat.YUV_422_888
-                || image.format == ImageFormat.YUV_444_888) {
+    @SuppressLint("UnsafeExperimentalUsageError", "UnsafeOptInUsageError")
+    override fun analyze(imageProxy: ImageProxy) {
+        /*
+        val mediaImage = imageProxy.image
+        if(mediaImage != null) {
+            val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+            val scanner = BarcodeScanning.getClient()
+            scanner.process(image).addOnSuccessListener { barcodes ->
+                if(barcodes.isNotEmpty())  {
+                    val barcode = barcodes.get(0)
+                    val ok = barcode.displayValue!!
 
-            val buffer = image.planes[0].buffer
+                    callback.onSuccess(ok)
+
+                }
+            }.addOnFailureListener {
+
+            }
+        }
+
+         */
+
+        if (imageProxy.format == ImageFormat.YUV_420_888
+                || imageProxy.format == ImageFormat.YUV_422_888
+                || imageProxy.format == ImageFormat.YUV_444_888) {
+
+            val buffer = imageProxy.planes[0].buffer
             val data = buffer.toByteArray()
             val source = PlanarYUVLuminanceSource(
-                    data, image.width, image.height, 0, 0, image.width, image.height, false)
+                    data, imageProxy.width, imageProxy.height, 0, 0, imageProxy.width, imageProxy.height, false)
 
             val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
 
@@ -44,7 +66,7 @@ class QRCodeImageAnalyzer(private var callback: OnQRCodeAnalyzerResult): ImageAn
 
         }
 
-        image.close()
+        imageProxy.close()
     }
 
 

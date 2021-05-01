@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultActivity"
-    android:id="@+id/activityResult">
+    android:id="@+id/activityResult"
+    android:background="@color/main_color_blue"
+    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="Result"
                 android:fontFamily="@font/montserrat_alternates_semi_bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="40sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

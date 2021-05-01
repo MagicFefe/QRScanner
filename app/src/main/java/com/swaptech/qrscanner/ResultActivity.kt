@@ -1,26 +1,14 @@
 package com.swaptech.qrscanner
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.*
 import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.URLSpan
-import android.text.style.UnderlineSpan
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.swaptech.qrscanner.databinding.ActivityResultBinding
-
 
 class ResultActivity : AppCompatActivity() {
 

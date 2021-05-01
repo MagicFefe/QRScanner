@@ -6,83 +6,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateQRActivity"
-    >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            tools:context=".CreateQRActivity">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextForQR"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:hint="type something"
-                />
-            <ImageView
-                android:id="@+id/qrImageView"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextForQR"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    android:background="@color/main_color_blue">
+        
+     <androidx.cardview.widget.CardView
+         android:id="@+id/create_qr_btn"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:transitionName="scanQrBtn"
+         app:cardBackgroundColor="@color/second_color_yellow"
+         app:cardCornerRadius="9dp"
+         app:cardElevation="10dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         >
+    
+         <ImageView
+             android:layout_width="71dp"
+             android:layout_height="71dp"
+             android:layout_gravity="center_horizontal"
+             android:layout_marginTop="20dp"
+             android:background="@android:color/transparent"
+             android:src="@drawable/ic_baseline_auto_fix_high_24" />
+    
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom"
+             android:layout_marginStart="12dp"
+             android:layout_marginBottom="24dp"
+             android:fontFamily="@font/montserrat_alternates_semi_bold"
+             android:text="CREATE QR"
+             android:textColor="@color/black" />
+    
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom"
+             android:layout_marginStart="12dp"
+             android:layout_marginBottom="6dp"
+             android:fontFamily="@font/montserrat_alternates_semi_bold"
+             android:text="CODE"
+             android:textColor="@color/black" />
+     </androidx.cardview.widget.CardView>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_alternates_semi_bold"
+        android:textSize="@dimen/title_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/title_margin_top"
+        android:text="Creating"
+        android:textColor="@color/white"
+        />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/create_qr_btn"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionName="scanQrBtn"
-        app:cardBackgroundColor="@color/second_color_yellow"
-        app:cardCornerRadius="9dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="310dp"
+        android:layout_height="310dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="17dp"
         app:layout_constraintTop_toTopOf="parent"
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        android:scrollbars="vertical|horizontal"
         >
-
         <ImageView
-            android:layout_width="71dp"
-            android:layout_height="71dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_auto_fix_high_24" />
+            android:id="@+id/qrImageView"
+            android:layout_width="305dp"
+            android:layout_height="305dp"
+            android:layout_gravity="center"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/montserrat_alternates_semi_bold"
-            android:text="CREATE QR"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="6dp"
-            android:fontFamily="@font/montserrat_alternates_semi_bold"
-            android:text="CODE"
-            android:textColor="@color/black" />
+            />
     </androidx.cardview.widget.CardView>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/editTextForQR"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/editTextForQR"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:text="@string/type_something_tv"
+        android:layout_marginBottom="10dp"
+        android:textSize="23sp"
+        />
+
+
+    <EditText
+        android:id="@+id/editTextForQR"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/uploadBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_edittext"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserratalternates_regular"
+        android:maxLength="1000"
+        android:scrollbars="vertical"
+        android:overScrollMode="ifContentScrolls"
+        />
+
+
+    
+    <ImageButton
+        android:id="@+id/uploadBtn"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/start_button"
+        android:src="@drawable/ic_baseline_save_24"
+        app:layout_constraintStart_toEndOf="@id/editTextForQR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/editTextForQR"
+        android:layout_marginEnd="20dp"
+        />
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,8 +10,9 @@
 
 
     <color name="main_color_blue">#0000D8</color>
+    <color name="main_color_blue_light">#3B3BEC</color>
+    <color name="main_color_blue_very_light">#6A6AEC</color>
     <color name="second_color_yellow">#FFBF00</color>
-    <color name="dark_yellow">#FFDC73</color>
-    <color name="third_color_purple">#5C00D5</color>
-    <color name="bottom_sheet_background">#80000000</color>
+    <color name="second_color_yellow_light">#FFDC73</color>
+
 </resources>

@@ -4,16 +4,13 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Rect
-import android.media.Image
+import android.hardware.Camera
+
+import android.hardware.camera2.CameraManager
 import android.net.Uri
 import android.os.Bundle
-import android.renderscript.ScriptGroup
-import android.system.Os.close
-import android.widget.ImageView
+import android.view.animation.AnimationUtils
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
@@ -21,16 +18,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import com.google.zxing.*
-import com.google.zxing.common.HybridBinarizer
-import com.google.zxing.multi.qrcode.QRCodeMultiReader
-import com.google.zxing.qrcode.QRCodeReader
 import com.swaptech.qrscanner.databinding.ActivityMainBinding
-import java.io.ByteArrayOutputStream
-import java.io.Reader
+import java.nio.channels.AsynchronousFileChannel.open
 import java.util.*
 
 
@@ -41,13 +33,23 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private var qrCode = ""
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
+    val hasFlashlight by lazy {
+        baseContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
+    }
     var mIntent: Intent? = null
+
+    private val anim by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.scale_anim)
+    }
+    private val interpolator = CustomBounceInterpolator(0.2, 10.toDouble())
+
+
 
     private val qrCodeAnalyzer by lazy {
         QRCodeImageAnalyzer(object : QRCodeImageAnalyzer.OnQRCodeAnalyzerResult {
             override fun onSuccess(result: String) {
                 qrCode = result
-                Toast.makeText(this@MainActivity, "result is $result", Toast.LENGTH_SHORT).show()
+
                 try {
                     mIntent.apply {
                         this?.putExtra(EXTRA_DATA_KEY, qrCode)
@@ -72,8 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-
-
+        anim.interpolator = interpolator
 
         if (allPermissionsGranted()) {
             startCamera()
@@ -88,10 +89,16 @@ class MainActivity : AppCompatActivity() {
 
         mIntent = Intent(this, ResultActivity::class.java)
 
-        binding.pickFromGalleryBtn.setOnClickListener {
+        binding.pickFromGalleryBtn.setOnClickListener { btn ->
+
+            btn.startAnimation(anim)
+
             val intent = Intent(Intent.ACTION_PICK).apply { type = MIMETYPE_IMAGES }
             startActivityForResult(intent, PICK_IMAGE_CODE)
         }
+
+
+
     }
 
 
@@ -137,15 +144,33 @@ class MainActivity : AppCompatActivity() {
             try {
                 cameraProvider.unbindAll()
 
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+                val cameraX = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
 
+                var counter = 0
+                if(cameraX.cameraInfo.hasFlashUnit()) {
+                    binding.flashlightBtn.setOnClickListener { btn ->
+                        counter++
+                        btn.startAnimation(anim)
+                        try {
+                            if(counter % 2 == 0) {
+                                (btn as ImageButton).setImageResource(R.drawable.ic_baseline_flashlight_on_24)
+                                cameraX.cameraControl.enableTorch(false)
+                            } else {
+                                (btn as ImageButton).setImageResource(R.drawable.ic_baseline_flashlight_off_24)
+                                cameraX.cameraControl.enableTorch(true)
+                            }
+                        } catch(e: Exception) {
+
+                        }
+                    }
+
+                }
 
             } catch (e: Exception) {
                 Toast.makeText(this, "${e.message}", Toast.LENGTH_SHORT).show()
             }
 
         }, ContextCompat.getMainExecutor(this))
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -160,11 +185,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun allPermissionsGranted(): Boolean {
         permissions.forEach { permission ->
-            if (ContextCompat.checkSelfPermission(
-                            this,
-                            permission
-                    ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
