@@ -1,7 +1,5 @@
 package com.swaptech.qrscanner
 
-import androidx.lifecycle.ViewModel
-
 object URLValidator {
 
     fun validate(url: String): Pair<Boolean, MutableList<String>?>{

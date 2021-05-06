@@ -36,7 +36,7 @@ class PhotoSaver(private val context: Context) {
             val image = File(imagesDirectory, filename)
             fileOutputStream = FileOutputStream(image)
         }
-
+        
         fileOutputStream.use { stream ->
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             Toast.makeText(context, "saved", Toast.LENGTH_SHORT).show()
